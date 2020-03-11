@@ -22,12 +22,11 @@ public class Print {
             String telNumberString = line.substring(0, indexOfFirstMatch); // присваиваем значение с начала line до indexOfFirstMatch (первого эмейла)
             //System.out.println(telNumberString);
             String extractedNumber = "+" + telNumberString.replaceAll("\\D+", ""); // приводим все номера к одному виду с помощью замены
-            if(phonesAndEmails.containsKey(extractedNumber)){ // проверяем содержит ли map совпадение по ключу
-                List<String> listEmail = phonesAndEmails.get(extractedNumber); // получаем эмейлы по ключу и добавляем их в listEmail
-                listEmail.addAll(emails); // добавляем в listEmail все emails
-                phonesAndEmails.replace(extractedNumber, listEmail); // обновляем map phoneAndEmails
-            }
-            else {
+            if(phonesAndEmails.containsKey(extractedNumber) && !phonesAndEmails.containsValue(phonesAndEmails.get(extractedNumber))){ // проверяем содержит ли map совпадение по ключу
+                    List<String> listEmail = phonesAndEmails.get(extractedNumber); // получаем эмейлы по ключу и добавляем их в listEmail
+                    listEmail.addAll(emails); // добавляем в listEmail все emails
+                    phonesAndEmails.replace(extractedNumber, listEmail); // обновляем map phoneAndEmails
+            } else {
                 phonesAndEmails.put(extractedNumber, emails); // если совпадения нет, то кладём в map ключ и значение
             }
 
