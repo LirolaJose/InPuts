@@ -14,8 +14,6 @@ public class GzFile {
             while ((length = gzipis.read(buffer)) > 0) {
                 fos.write(buffer, 0, length);
             }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GzFile.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(GzFile.class.getName()).log(Level.SEVERE, null, ex);
         }

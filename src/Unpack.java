@@ -10,7 +10,7 @@ public class Unpack {
         if(!dir.exists()){
             dir.mkdir();
         }
-        ZipFile zip = new ZipFile(path);// выдает ошибку
+        ZipFile zip = new ZipFile(path);
         Enumeration entries = zip.entries();
         LinkedList<ZipEntry> zfiles = new LinkedList<>();
         while (entries.hasMoreElements()) {

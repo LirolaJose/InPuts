@@ -3,7 +3,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class Print {
+    private String srt;
     public void getNumberFromFile(File fileName, Map<String, List<String>> phonesAndEmails) throws Exception { // метод getNumberFromFile c параметрами: указание файла и map
         FileReader fr = new FileReader(fileName); // чтение файла fileName
         Scanner scan = new Scanner(fr); // сканирование файла
@@ -34,6 +36,19 @@ public class Print {
         }
 
         fr.close();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Print print = (Print) o;
+        return Objects.equals(srt, print.srt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(srt);
     }
 }
 
