@@ -28,9 +28,9 @@ public class Test1 {
                     }
                 } else {
                     String textFile = item.toString();
-                    if (textFile.endsWith(".txt")) {
+                    //if (textFile.endsWith(".txt")) {
                         print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
-                    }
+                    //}
                 }
             }
         }
