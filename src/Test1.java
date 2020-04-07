@@ -24,12 +24,12 @@ public class Test1 {
                         File newFolder = new File(destName);
                         this.fetchChild(newFolder);
                     } else if (absolutePath.endsWith(".gz")) {
-                            GzFile.unGZIP(absolutePath);
+                        GzFile.unGZIP(absolutePath);
                     }
                 } else {
                     String textFile = item.toString();
                     //if (textFile.endsWith(".txt")) {
-                        print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
+                    print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
                     //}
                 }
             }

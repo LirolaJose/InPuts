@@ -22,22 +22,13 @@ public class Print {
             String firstMatch = emails.get(0); // создаем переменную и присваиваем значение взятое из emails ( первый эмейл)
             int indexOfFirstMatch = line.indexOf(firstMatch); // метод indexOf применяем к переменной line, с параметром firstMatch, то есть с первого эмейла присваиваем значение.
             String telNumberString = line.substring(0, indexOfFirstMatch); // присваиваем значение с начала line до indexOfFirstMatch (первого эмейла)
+
             TelNumber phone = new TelNumber();
-            phone.firstNumber = telNumberString.substring(0, telNumberString.indexOf("("));
-            if(phone.firstNumber.contains(" ")){
-               phone.firstNumber = phone.firstNumber.replace(" ", "");
-            }
-            phone.cityCode = telNumberString.substring(telNumberString.indexOf("("), telNumberString.indexOf(")")+1);
-            if(phone.cityCode.equals("(101)")){
-                phone.cityCode = "(401)";
-            } else if(phone.cityCode.equals("(202)")){
-                phone.cityCode = "(802)";
-            }else if(phone.cityCode.equals("(301)")){
-                phone.cityCode = "(321)";
-            }
-            phone.number = telNumberString.substring(telNumberString.indexOf(")")+1);
-            String modNumber = phone.number.replaceAll("\\D+", "");
-            String changedPhone = phone.firstNumber + phone.cityCode + modNumber;
+            phone.setFirstNumber(telNumberString.substring(0, telNumberString.indexOf("(")));
+            phone.setCityCode(telNumberString.substring(telNumberString.indexOf("("), telNumberString.indexOf(")")+1));
+            phone.setNumber(telNumberString.substring(telNumberString.indexOf(")")+1));
+            String modNumber = phone.getNumber().replaceAll("\\D+", "");
+            String changedPhone = phone.getFirstNumber() + phone.getCityCode() + modNumber;
             //String extractedNumber = "+" + telNumberString.replaceAll("\\D+", ""); // приводим все номера к одному виду с помощью замены
             if(phonesAndEmails.containsKey(changedPhone) && !phonesAndEmails.containsValue(phonesAndEmails.get(changedPhone))){ // проверяем содержит ли map совпадение по ключу
                     List<String> listEmail = phonesAndEmails.get(changedPhone); // получаем эмейлы по ключу и добавляем их в listEmail
@@ -54,8 +45,4 @@ public class Print {
     }
 }
 
-class TelNumber{
-    String firstNumber;
-    String cityCode;
-    String number;
-}
+
