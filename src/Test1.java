@@ -20,6 +20,7 @@ public class Test1 {
                     if (absolutePath.endsWith(".zip")) {
                         destName = absolutePath.substring(0, absolutePath.lastIndexOf(".zip"));
                         Unpack.unpackZip(absolutePath, destName);
+                        DeleteDir.deleteDirectory(item);
                         assert destName != null;
                         File newFolder = new File(destName);
                         fetchChild(newFolder);
