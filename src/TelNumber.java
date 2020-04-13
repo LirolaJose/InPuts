@@ -20,7 +20,7 @@ public class TelNumber {
 
     public void setCityCode(String cityCode) {
         this.cityCode = cityCode;
-        switch (cityCode) {
+        /*switch (cityCode) {
             case "(101)":
                 this.cityCode = "(401)";
                 break;
@@ -30,7 +30,7 @@ public class TelNumber {
             case "(301)":
                 this.cityCode = "(321)";
                 break;
-        }
+        }*/
     }
 
     public String getNumber() {

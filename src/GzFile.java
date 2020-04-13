@@ -4,8 +4,7 @@ import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 
 public class GzFile {
-
-    public static void unGZIP(String filename) {
+    public static void unGZIP(String filename) throws Exception {
         int BUFFER_SIZE = 1024;
         byte[] buffer = new byte[BUFFER_SIZE];
 
@@ -21,7 +20,9 @@ public class GzFile {
         }
     }
 
-    private static String getDstFileName(final String srcFileName) {
+
+   public static String getDstFileName(final String srcFileName) {
         return srcFileName.substring(0, srcFileName.lastIndexOf("."));
     }
+
 }

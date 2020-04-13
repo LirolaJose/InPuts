@@ -9,11 +9,11 @@ public class Test1 {
     static Map<String, List<String>> phonesAndEmails = new HashMap<>(); // создание map c ключём String и значением Список Strings, имя Map phoneAndEmails, тип map - HashMap
 
 
-    public void fetchChild(File dir) throws Exception { // метод fetchChild с параметром File dir
+    public  void fetchChild(File dir) throws Exception { // метод fetchChild с параметром File dir
         if (dir.isDirectory()) { // условный оператор if с параметром если dir это Папка
             for (File item : dir.listFiles()) {
                 if (item.isDirectory()) { // если объект - это папка вывводит на экран путь и надпись "папка"
-                    this.fetchChild(item);
+                    fetchChild(item);
                 } else if (isArchive(item.getName())) {
                     String absolutePath = item.getAbsolutePath();
                     String destName = null;
@@ -22,21 +22,22 @@ public class Test1 {
                         Unpack.unpackZip(absolutePath, destName);
                         assert destName != null;
                         File newFolder = new File(destName);
-                        this.fetchChild(newFolder);
+                        fetchChild(newFolder);
                     } else if (absolutePath.endsWith(".gz")) {
                         GzFile.unGZIP(absolutePath);
+                        File textFile = new File(GzFile.getDstFileName(absolutePath));
+                        fetchChild(textFile);
                     }
                 } else {
-                    String textFile = item.toString();
-                    //if (textFile.endsWith(".txt")) {
-                    print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
-                    //}
+                    Print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
                 }
             }
+        /*}else{
+            Print.getNumberFromFile(dir, phonesAndEmails);*/
         }
     }
 
-    public boolean isArchive(String item) {
+    public static boolean isArchive(String item) {
         return item.endsWith(".zip") || item.endsWith(".gz");
     }
 
