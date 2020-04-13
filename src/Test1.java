@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Test1 {
-    Print print = new Print(); // переменная print класса Print
     static Map<String, List<String>> phonesAndEmails = new HashMap<>(); // создание map c ключём String и значением Список Strings, имя Map phoneAndEmails, тип map - HashMap
 
 
@@ -16,7 +15,7 @@ public class Test1 {
                     fetchChild(item);
                 } else if (isArchive(item.getName())) {
                     String absolutePath = item.getAbsolutePath();
-                    String destName = null;
+                    String destName;
                     if (absolutePath.endsWith(".zip")) {
                         destName = absolutePath.substring(0, absolutePath.lastIndexOf(".zip"));
                         Unpack.unpackZip(absolutePath, destName);
@@ -46,7 +45,7 @@ public class Test1 {
         File delDir = new File("D://Programming//inputs//");
         DeleteDir.deleteDirectory(delDir);
         Unpack.unpackZip("D://Programming//inputs_v2.zip", "D://Programming//");
-        Test1 example = new Test1(); // переменная example класса Test1
+        Test1 example = new Test1(); // объект example класса Test1
         File dir = new File("D://Programming//inputs//"); // переменная dir класса File. в с кобках указан путь
         example.fetchChild(dir);// переменная example вызывает метод fetchChild
         phonesAndEmails.forEach((phone, email) -> System.out.println(phone + ":" + email.toString())); // в Map для каждой пары ключ - значение выводим на экран: Ключ: Значение в строку
