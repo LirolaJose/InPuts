@@ -49,8 +49,7 @@ public class Test1 {
         File dir = new File("D://Programming//inputs//"); // переменная dir класса File. в с кобках указан путь
         example.fetchChild(dir);// переменная example вызывает метод fetchChild
         phonesAndEmails.forEach((phone, email) -> System.out.println(phone + ":" + email.toString())); // в Map для каждой пары ключ - значение выводим на экран: Ключ: Значение в строку
-
-
+        MkTextFile.mkTxt(phonesAndEmails);
     }
 
 }
