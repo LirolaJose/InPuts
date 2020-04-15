@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MkTextFile {
     public static void mkTxt(Map<String, List<String>> phonesAndEmails) throws IOException {
@@ -21,9 +23,15 @@ public class MkTextFile {
         for(int i = 0; i<valuesList.size(); i++) {
             String[] strings = new String[valuesList.size()];
             String str = valuesList.get(i).toString();
-            strings[i] = str;
-            emailsList.add(strings[i]);
+            Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(str);
+            while (m.find()) { // пока Matcher будет находить адреса
+                String email = m.group();
+                if (email.endsWith(".org")) {
+                    strings[i] = email;
+                    emailsList.add(strings[i]);
+                }
             }
+        }
         Collections.sort(emailsList);
 
         FileWriter phone = new FileWriter(phonesFile);
