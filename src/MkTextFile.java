@@ -1,24 +1,40 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MkTextFile {
     public static void mkTxt(Map<String, List<String>> phonesAndEmails) throws IOException {
         File phonesFile = new File("D://Programming//inputs//phones.txt");
+        if (!phonesFile.exists()) {
+            phonesFile.createNewFile();
+        }
         File emailsFile = new File("D://Programming//inputs//emails.txt");
-        phonesFile.createNewFile();
-        emailsFile.createNewFile();
-        FileWriter phone = new FileWriter("D://Programming//inputs//phones.txt");
-        for (Map.Entry<String, List<String>> entry : phonesAndEmails.entrySet()) {
-            phone.write(entry.getKey() + "\n");
+        if (!emailsFile.exists()) {
+            emailsFile.createNewFile();
+        }
+        List<String> phoneList = new ArrayList<>(phonesAndEmails.keySet());
+        Collections.sort(phoneList);
+
+        List<List<String>> valuesList = new ArrayList<>(phonesAndEmails.values());
+        List<String> emailsList = new ArrayList<>();
+        for(int i = 0; i<valuesList.size(); i++) {
+            String[] strings = new String[valuesList.size()];
+            String str = valuesList.get(i).toString();
+            strings[i] = str;
+            emailsList.add(strings[i]);
+            }
+        Collections.sort(emailsList);
+
+        FileWriter phone = new FileWriter(phonesFile);
+        for (int i = 0; i < phoneList.size(); i++) {
+            phone.write(phoneList.get(i) + "\n");
         }
         phone.close();
-        FileWriter emails = new FileWriter("D://Programming//inputs//emails.txt");
-        for (Map.Entry<String, List<String>> entry : phonesAndEmails.entrySet()) {
-            emails.write(entry.getValue() + "\n");
+
+        FileWriter emails = new FileWriter(emailsFile);
+        for (int i = 0; i<emailsList.size(); i++) {
+            emails.write(emailsList.get(i) + "\n");
         }
         emails.close();
     }
