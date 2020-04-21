@@ -38,7 +38,7 @@ public class Test1 {
                     Print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
                 }
             }
-        }else{
+        }else {
             Print.getNumberFromFile(dir, phonesAndEmails);
         }
     }
@@ -48,15 +48,16 @@ public class Test1 {
     }
 
     public static void main(String[] args) throws Exception { // метод main
-        File delDir = new File("D://Programming//inputs//");
-        DeleteDir.deleteDirectory(delDir);
+       File dir = new File("D://Programming//inputs//");
+        if(dir.exists()) {
+            DeleteDir.deleteDirectory(dir);
+        }
         Unpack.unpackZip("D://Programming//inputs_v2.zip", "D://Programming//");
         Test1 example = new Test1(); // объект example класса Test1
-        File dir = new File("D://Programming//inputs//"); // переменная dir класса File. в с кобках указан путь
         example.fetchChild(dir);// переменная example вызывает метод fetchChild
         phonesAndEmails.forEach((phone, email) -> System.out.println(phone + ":" + email.toString())); // в Map для каждой пары ключ - значение выводим на экран: Ключ: Значение в строку
         MkTextFile.mkTxt(phonesAndEmails);
-        ZipPack.zip(delDir.getAbsolutePath(), "D://Programming//inputsV2.zip");
+        ZipPack.zip(dir.getAbsolutePath(), "D://Programming//inputsV2.zip");
     }
 
 }

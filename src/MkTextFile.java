@@ -24,7 +24,7 @@ public class MkTextFile {
             String[] strings = new String[valuesList.size()];
             String str = valuesList.get(i).toString();
             Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(str);
-            while (m.find()) { // пока Matcher будет находить адреса
+            while (m.find()) {
                 String email = m.group();
                 if (email.endsWith(".org")) {
                     strings[i] = email;

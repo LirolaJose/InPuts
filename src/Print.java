@@ -12,15 +12,17 @@ public class Print {
         EditTextFile.editFile(fileName);
 
         while (scan.hasNextLine()) { // пока scan имеет следующую строку будет выпоняться сканирование
-            String line = scan.nextLine(); 
+            String line = scan.nextLine();
             Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(line); // метод Matcher выделяет из файла почтовые адреса
             List<String> emails = new ArrayList<>();// создание списка emails
-            /*if (line.endsWith(")")) {
-                break;
-            }*/
+            if (line.endsWith(")")||line.equals("")) {
+                continue;
+            }
             while (m.find()) { // пока Matcher будет находить адреса
-                String email = m.group(); // они будут добавляться в переменную email которой присваивается группа всех найденных адресов
-                emails.add(email); // в emails добавляе все email.
+                String email = m.group();
+                if(!emails.contains(email)) {// они будут добавляться в переменную email которой присваивается группа всех найденных адресов
+                    emails.add(email); // в emails добавляе все email.
+                }
             }
             String firstMatch = emails.get(0); // создаем переменную и присваиваем значение взятое из emails ( первый эмейл)
             int indexOfFirstMatch = line.indexOf(firstMatch); // метод indexOf применяем к переменной line, с параметром firstMatch, то есть с первого эмейла присваиваем значение.
