@@ -7,10 +7,9 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipPack {
     public static void zip(String source_dir, String zip_file) throws Exception {
-        String sourceFile = source_dir;
         FileOutputStream fos = new FileOutputStream(zip_file);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
-        File fileToZip = new File(sourceFile);
+        File fileToZip = new File(source_dir);
 
         zipFile(fileToZip, fileToZip.getName(), zipOut);
         zipOut.close();

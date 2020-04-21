@@ -23,17 +23,23 @@ public class Test1 {
                         assert destName != null;
                         File newFolder = new File(destName);
                         fetchChild(newFolder);
+                        String zipFile = destName + ".zip";
+                        ZipPack.zip(destName, zipFile);
                     } else if (absolutePath.endsWith(".gz")) {
                         GzFile.unGZIP(absolutePath);
-                        File textFile = new File(GzFile.getDstFileName(absolutePath));
+                        DeleteDir.deleteDirectory(item);
+                        destName = GzFile.getDstFileName(absolutePath);
+                        File textFile = new File(destName);
                         fetchChild(textFile);
+                        String gzFile = destName +".gz";
+                        GzPack.compressGzipFile(destName, gzFile);
                     }
                 } else {
                     Print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
                 }
             }
-        /*}else{
-            Print.getNumberFromFile(dir, phonesAndEmails);*/
+        }else{
+            Print.getNumberFromFile(dir, phonesAndEmails);
         }
     }
 
@@ -50,6 +56,7 @@ public class Test1 {
         example.fetchChild(dir);// переменная example вызывает метод fetchChild
         phonesAndEmails.forEach((phone, email) -> System.out.println(phone + ":" + email.toString())); // в Map для каждой пары ключ - значение выводим на экран: Ключ: Значение в строку
         MkTextFile.mkTxt(phonesAndEmails);
+        ZipPack.zip(delDir.getAbsolutePath(), "D://Programming//inputsV2.zip");
     }
 
 }
