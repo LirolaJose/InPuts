@@ -12,17 +12,28 @@ public class EditTextFile {
 
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
-            if (line.contains("(101)")) {
-                line = line.replace("(101)", "(401)");
-                lines.add(line);
-            } else if (line.contains("(202")) {
-                line = line.replace("(202)", "(802)");
-                lines.add(line);
-            } else if (line.contains("(301")) {
-                line = line.replace("(301)", "(321)");
-                lines.add(line);
-            }else{
-                lines.add(line);
+            if(line.equals("")){
+                continue;
+            }
+            String cityCode = line.substring(line.indexOf("("), line.indexOf(")")+1);
+            if (lines.contains(line)) {
+                continue;
+            }
+            switch (cityCode) {
+                case "(101)":
+                    line = line.replace("(101)", "(401)");
+                    lines.add(line);
+                    break;
+                case "(202)":
+                    line = line.replace("(202)", "(802)");
+                    lines.add(line);
+                    break;
+                case "(301)":
+                    line = line.replace("(301)", "(321)");
+                    lines.add(line);
+                    break;
+                default:
+                    lines.add(line);
             }
         }
         fr.close();
