@@ -36,6 +36,9 @@ public class MkTextFile {
 
         FileWriter phone = new FileWriter(phonesFile);
         for (int i = 0; i < phoneList.size(); i++) {
+            if(phoneList.get(i).equals("Invalid number")){
+                continue;
+            }
             phone.write(phoneList.get(i) + "\n");
         }
         phone.close();

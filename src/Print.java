@@ -31,14 +31,20 @@ public class Print {
             TelNumber phone = new TelNumber();
             phone.setFirstNumber(telNumberString.substring(0, telNumberString.indexOf("(")));
             phone.setCityCode(telNumberString.substring(telNumberString.indexOf("("), telNumberString.indexOf(")") + 1));
+            int charsCityCode = phone.getCityCode().length();
             phone.setNumber(telNumberString.substring(telNumberString.indexOf(")") + 1));
             String modNumber = phone.getNumber().replaceAll("\\D+", "");
             String changedPhone = phone.getFirstNumber() + phone.getCityCode() + modNumber;
-            //String extractedNumber = "+" + telNumberString.replaceAll("\\D+", ""); // приводим все номера к одному виду с помощью замены
-            if (phonesAndEmails.containsKey(changedPhone) && !phonesAndEmails.containsValue(phonesAndEmails.get(changedPhone))) { // проверяем содержит ли map совпадение по ключу
-                List<String> listEmail = phonesAndEmails.get(changedPhone); // получаем эмейлы по ключу и добавляем их в listEmail
-                listEmail.addAll(emails); // добавляем в listEmail все emails
-                phonesAndEmails.replace(changedPhone, listEmail); // обновляем map phoneAndEmails
+            if(charsCityCode>5){
+                changedPhone = "Invalid number";
+            }
+            if (phonesAndEmails.containsKey(changedPhone)) { // проверяем содержит ли map совпадение по ключу
+                if(!phonesAndEmails.get(changedPhone).containsAll(emails)) {
+                    List<String> listEmail = phonesAndEmails.get(changedPhone); // получаем эмейлы по ключу и добавляем их в listEmail
+                    listEmail.addAll(emails); // добавляем в listEmail все emails
+                    phonesAndEmails.replace(changedPhone, listEmail); // обновляем map phoneAndEmails
+                }else{
+                    continue;}
             } else {
                 phonesAndEmails.put(changedPhone, emails); // если совпадения нет, то кладём в map ключ и значение
             }
