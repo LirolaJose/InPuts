@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class MkTextFile {
     public static void mkTxt(Map<String, List<String>> phonesAndEmails) throws IOException {
@@ -19,20 +20,8 @@ public class MkTextFile {
         Collections.sort(phoneList);
 
         List<List<String>> valuesList = new ArrayList<>(phonesAndEmails.values());
-        List<String> emailsList = new ArrayList<>();
-        for(int i = 0; i<valuesList.size(); i++) {
-            String[] strings = new String[valuesList.size()];
-            String str = valuesList.get(i).toString();
-            Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(str);
-            while (m.find()) {
-                String email = m.group();
-                if (email.endsWith(".org")) {
-                    strings[i] = email;
-                    emailsList.add(strings[i]);
-                }
-            }
-        }
-        Collections.sort(emailsList);
+        List<String> emailsList = valuesList.stream()
+                .flatMap(Collection::stream).sorted().collect(Collectors.toList());
 
         FileWriter phone = new FileWriter(phonesFile);
         for (int i = 0; i < phoneList.size(); i++) {

@@ -16,9 +16,7 @@ public class EditTextFile {
                 continue;
             }
             String cityCode = line.substring(line.indexOf("("), line.indexOf(")")+1);
-            if (lines.contains(line)) {
-                continue;
-            }
+
             switch (cityCode) {
                 case "(101)":
                     line = line.replace("(101)", "(401)");
@@ -34,6 +32,9 @@ public class EditTextFile {
                     break;
                 default:
                     lines.add(line);
+            }
+            if (lines.contains(line)) {
+                continue;
             }
         }
         fr.close();
