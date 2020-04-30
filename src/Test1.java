@@ -1,12 +1,16 @@
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Test1 {
     static Map<String, List<String>> phonesAndEmails = new HashMap<>(); // создание map c ключём String и значением Список Strings, имя Map phoneAndEmails, тип map - HashMap
-
+    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    Date date = new Date();
 
     public void fetchChild(File dir) throws Exception { // метод fetchChild с параметром File dir
         if (dir.isDirectory()) { // условный оператор if с параметром если dir это Папка
@@ -24,6 +28,7 @@ public class Test1 {
                         fetchChild(newFolder);
                         String zipFile = destName + ".zip";
                         ZipPack.zip(destName, zipFile);
+                        System.out.println(dateFormat.format(date) + newFolder.getPath()+" is archived");
                         DeleteDir.deleteDirectory(newFolder);
                     } else if (absolutePath.endsWith(".gz")) {
                         GzFile.unGZIP(absolutePath);
@@ -33,13 +38,16 @@ public class Test1 {
                         fetchChild(textFile);
                         String gzFile = destName + ".gz";
                         GzPack.compressGzipFile(destName, gzFile);
+                        System.out.println(dateFormat.format(date) + textFile.getPath()+" is archived");
                         DeleteDir.deleteDirectory(textFile);
                     }
                 } else {
+                    System.out.println(dateFormat.format(date) + item.getPath()+" is being processed");
                     Print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
                 }
             }
         } else {
+            System.out.println(dateFormat.format(date) + dir.getPath()+" is being processed");
             Print.getNumberFromFile(dir, phonesAndEmails);
         }
     }
@@ -49,13 +57,13 @@ public class Test1 {
     }
 
     public static void main(String[] args) throws Exception { // метод main
-        /*File dir = new File("D://Programming//inputs//");
+        File dir = new File("D://Programming//inputs//");
         if (dir.exists()) {
             DeleteDir.deleteDirectory(dir);
         }
-        Unpack.unpackZip("D://Programming//inputs_v2.zip", "D://Programming//");*/
+        Unpack.unpackZip("D://Programming//inputs_v2.zip", "D://Programming//");
         Test1 example = new Test1(); // объект example класса Test1
-        File dir = new File("D://Programming//testPack//");
+        //File dir = new File("D://Programming//testPack//");
         example.fetchChild(dir);// переменная example вызывает метод fetchChild
         phonesAndEmails.forEach((phone, email) -> System.out.println(phone + ":" + email.toString())); // в Map для каждой пары ключ - значение выводим на экран: Ключ: Значение в строку
         MkTextFile.mkTxt(phonesAndEmails);

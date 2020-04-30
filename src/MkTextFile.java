@@ -34,7 +34,9 @@ public class MkTextFile {
 
         FileWriter emails = new FileWriter(emailsFile);
         for (int i = 0; i<emailsList.size(); i++) {
-            emails.write(emailsList.get(i) + "\n");
+            if(emailsList.get(i).endsWith(".org")) {
+                emails.write(emailsList.get(i) + "\n");
+            }
         }
         emails.close();
     }

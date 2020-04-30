@@ -31,10 +31,10 @@ public class EditTextFile {
                     lines.add(line);
                     break;
                 default:
+                    if (lines.contains(line)) {
+                        continue;
+                    }
                     lines.add(line);
-            }
-            if (lines.contains(line)) {
-                continue;
             }
         }
         fr.close();

@@ -7,9 +7,11 @@ import java.util.regex.Pattern;
 public class Print {
 
     public static void getNumberFromFile(File fileName, Map<String, List<String>> phonesAndEmails) throws Exception { // метод getNumberFromFile c параметрами: указание файла и map
+        //ChangeFile.editText(fileName);
+        EditTextFile.editFile(fileName);
         FileReader fr = new FileReader(fileName); // чтение файла fileName
         Scanner scan = new Scanner(fr); // сканирование файла
-        EditTextFile.editFile(fileName);
+
 
         while (scan.hasNextLine()) { // пока scan имеет следующую строку будет выпоняться сканирование
             String line = scan.nextLine();
