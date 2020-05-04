@@ -39,8 +39,8 @@ public class EditTextFile {
         }
         fr.close();
         FileWriter fw = new FileWriter(file);
-        for (int i = 0; i < lines.size(); i++) {
-            fw.write(lines.get(i) + "\n");
+        for (String line : lines) {
+            fw.write(line + "\n");
         }
         fw.close();
     }

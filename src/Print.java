@@ -17,14 +17,19 @@ public class Print {
             String line = scan.nextLine();
             Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(line); // метод Matcher выделяет из файла почтовые адреса
             List<String> emails = new ArrayList<>();// создание списка emails
-            if (line.endsWith(")")||line.equals("")) {
+            Matcher match = Pattern.compile("(\\+*)(.+)(\\(\\d+\\))(.+)").matcher(line); // (\\+*) - "+" может быть, а может нет; (.+) - любой символ 1 и более раз; (\\(\\d+\\)) - скобка, в ней цифровой символ 1 и более раз и закрывающая скобка; (.+) - - любой символ 1 и более раз;
+            if (line.equals("")) {
                 continue;
             }
-            while (m.find()) { // пока Matcher будет находить адреса
-                String email = m.group();
-                if(!emails.contains(email)) {// они будут добавляться в переменную email которой присваивается группа всех найденных адресов
-                    emails.add(email); // в emails добавляе все email.
+            if (match.find()) {
+                while (m.find()) { // пока Matcher будет находить адреса
+                    String email = m.group();
+                    if (!emails.contains(email)) {// они будут добавляться в переменную email которой присваивается группа всех найденных адресов
+                        emails.add(email); // в emails добавляе все email.
+                    }
                 }
+            } else {
+                continue;
             }
             String firstMatch = emails.get(0); // создаем переменную и присваиваем значение взятое из emails ( первый эмейл)
             int indexOfFirstMatch = line.indexOf(firstMatch); // метод indexOf применяем к переменной line, с параметром firstMatch, то есть с первого эмейла присваиваем значение.
@@ -37,11 +42,11 @@ public class Print {
             phone.setNumber(telNumberString.substring(telNumberString.indexOf(")") + 1));
             String modNumber = phone.getNumber().replaceAll("\\D+", "");
             String changedPhone = phone.getFirstNumber() + phone.getCityCode() + modNumber;
-            if(charsCityCode>5){
+            if (charsCityCode > 5) {
                 changedPhone = "Invalid number";
             }
             if (phonesAndEmails.containsKey(changedPhone)) { // проверяем содержит ли map совпадение по ключу
-                if(!phonesAndEmails.get(changedPhone).containsAll(emails)) {
+                if (!phonesAndEmails.get(changedPhone).containsAll(emails)) {
                     List<String> listEmail = phonesAndEmails.get(changedPhone); // получаем эмейлы по ключу и добавляем их в listEmail
                     listEmail.addAll(emails); // добавляем в listEmail все emails
                     phonesAndEmails.replace(changedPhone, listEmail); // обновляем map phoneAndEmails
