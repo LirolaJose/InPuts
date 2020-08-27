@@ -1,5 +1,9 @@
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,7 +11,6 @@ import java.util.regex.Pattern;
 public class Print {
 
     public static void getNumberFromFile(File fileName, Map<String, List<String>> phonesAndEmails) throws Exception { // метод getNumberFromFile c параметрами: указание файла и map
-        //ChangeFile.editText(fileName);
         EditTextFile.editFile(fileName);
         FileReader fr = new FileReader(fileName); // чтение файла fileName
         Scanner scan = new Scanner(fr); // сканирование файла

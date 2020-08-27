@@ -7,7 +7,7 @@ import java.util.zip.ZipFile;
 public class Unpack {
     public static void unpackZip(String path, String dir_to) throws IOException {
         File dir = new File(dir_to);
-        if(!dir.exists()){
+        if (!dir.exists()) {
             dir.mkdir();
         }
         ZipFile zip = new ZipFile(path);
@@ -16,14 +16,14 @@ public class Unpack {
         while (entries.hasMoreElements()) {
             ZipEntry entry = (ZipEntry) entries.nextElement();
             if (entry.isDirectory()) {
-                new File(dir_to+"/"+entry.getName()).mkdir();
+                new File(dir_to + "/" + entry.getName()).mkdir();
             } else {
                 zfiles.add(entry);
             }
         }
         for (ZipEntry entry : zfiles) {
             InputStream in = zip.getInputStream(entry);
-            OutputStream out = new FileOutputStream(dir_to+"/"+entry.getName());
+            OutputStream out = new FileOutputStream(dir_to + "/" + entry.getName());
             byte[] buffer = new byte[1024];
             int len;
             while ((len = in.read(buffer)) >= 0)

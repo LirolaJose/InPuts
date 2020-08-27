@@ -4,7 +4,7 @@ public class DeleteDir {
     public static void deleteDirectory(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();
-            if(children==null){
+            if (children == null) {
                 return;
             }
             for (String child : children) {

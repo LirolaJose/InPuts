@@ -2,11 +2,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class MkTextFile {
+public class CreateTextFile {
     public static void mkTxt(Map<String, List<String>> phonesAndEmails) throws IOException {
         File phonesFile = new File("D://Programming//inputs//phones.txt");
         if (!phonesFile.exists()) {
@@ -25,7 +23,7 @@ public class MkTextFile {
 
         FileWriter phone = new FileWriter(phonesFile);
         for (int i = 0; i < phoneList.size(); i++) {
-            if(phoneList.get(i).equals("Invalid number")){
+            if (phoneList.get(i).equals("Invalid number")) {
                 continue;
             }
             phone.write(phoneList.get(i) + "\n");
@@ -33,8 +31,8 @@ public class MkTextFile {
         phone.close();
 
         FileWriter emails = new FileWriter(emailsFile);
-        for (int i = 0; i<emailsList.size(); i++) {
-            if(emailsList.get(i).endsWith(".org")) {
+        for (int i = 0; i < emailsList.size(); i++) {
+            if (emailsList.get(i).endsWith(".org")) {
                 emails.write(emailsList.get(i) + "\n");
             }
         }

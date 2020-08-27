@@ -9,9 +9,9 @@ public class TelNumber {
 
     public void setFirstNumber(String firstNumber) {
         this.firstNumber = firstNumber;
-        if(this.firstNumber.contains(" ")){
-        this.firstNumber = this.firstNumber.replace(" ", "");
-    }
+        if (this.firstNumber.contains(" ")) {
+            this.firstNumber = this.firstNumber.replace(" ", "");
+        }
     }
 
     public String getCityCode() {

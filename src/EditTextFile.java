@@ -1,5 +1,7 @@
-import java.io.*;
-
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,11 +14,10 @@ public class EditTextFile {
 
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
-            if(line.equals("")){
+            if (line.equals("")) {
                 continue;
             }
-            String cityCode = line.substring(line.indexOf("("), line.indexOf(")")+1);
-
+            String cityCode = line.substring(line.indexOf("("), line.indexOf(")") + 1);
             switch (cityCode) {
                 case "(101)":
                     line = line.replace("(101)", "(401)");

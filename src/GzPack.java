@@ -1,5 +1,4 @@
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPOutputStream;
@@ -12,7 +11,7 @@ public class GzPack {
         GZIPOutputStream gzipOS = new GZIPOutputStream(fos);
         byte[] buffer = new byte[1024];
         int len;
-        while((len=fis.read(buffer)) != -1){
+        while ((len = fis.read(buffer)) != -1) {
             gzipOS.write(buffer, 0, len);
         }
         gzipOS.close();

@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
@@ -21,7 +23,7 @@ public class GzFile {
     }
 
 
-   public static String getDstFileName(final String srcFileName) {
+    public static String getDstFileName(final String srcFileName) {
         return srcFileName.substring(0, srcFileName.lastIndexOf("."));
     }
 
