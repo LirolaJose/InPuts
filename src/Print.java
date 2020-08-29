@@ -10,33 +10,33 @@ import java.util.regex.Pattern;
 
 public class Print {
 
-    public static void getNumberFromFile(File fileName, Map<String, List<String>> phonesAndEmails) throws Exception { // метод getNumberFromFile c параметрами: указание файла и map
+    public static void getNumberFromFile(File fileName, Map<String, List<String>> phonesAndEmails) throws Exception {
         EditTextFile.editFile(fileName);
-        FileReader fr = new FileReader(fileName); // чтение файла fileName
-        Scanner scan = new Scanner(fr); // сканирование файла
+        FileReader fr = new FileReader(fileName);
+        Scanner scan = new Scanner(fr);
 
 
         while (scan.hasNextLine()) { // пока scan имеет следующую строку будет выпоняться сканирование
             String line = scan.nextLine();
-            Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(line); // метод Matcher выделяет из файла почтовые адреса
+            Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(line);
             List<String> emails = new ArrayList<>();// создание списка emails
-            Matcher match = Pattern.compile("(\\+*)(.+)(\\(\\d+\\))(.+)").matcher(line); // (\\+*) - "+" может быть, а может нет; (.+) - любой символ 1 и более раз; (\\(\\d+\\)) - скобка, в ней цифровой символ 1 и более раз и закрывающая скобка; (.+) - - любой символ 1 и более раз;
+            Matcher match = Pattern.compile("(\\+*)(.+)(\\(\\d+\\))(.+)").matcher(line);
             if (line.equals("")) {
                 continue;
             }
             if (match.find()) {
-                while (m.find()) { // пока Matcher будет находить адреса
+                while (m.find()) {
                     String email = m.group();
-                    if (!emails.contains(email)) {// они будут добавляться в переменную email которой присваивается группа всех найденных адресов
-                        emails.add(email); // в emails добавляе все email.
+                    if (!emails.contains(email)) {
+                        emails.add(email);
                     }
                 }
             } else {
                 continue;
             }
-            String firstMatch = emails.get(0); // создаем переменную и присваиваем значение взятое из emails ( первый эмейл)
-            int indexOfFirstMatch = line.indexOf(firstMatch); // метод indexOf применяем к переменной line, с параметром firstMatch, то есть с первого эмейла присваиваем значение.
-            String telNumberString = line.substring(0, indexOfFirstMatch); // присваиваем значение с начала line до indexOfFirstMatch (первого эмейла)
+            String firstMatch = emails.get(0);
+            int indexOfFirstMatch = line.indexOf(firstMatch);
+            String telNumberString = line.substring(0, indexOfFirstMatch);
 
             TelNumber phone = new TelNumber();
             phone.setFirstNumber(telNumberString.substring(0, telNumberString.indexOf("(")));
@@ -48,14 +48,14 @@ public class Print {
             if (charsCityCode > 5) {
                 changedPhone = "Invalid number";
             }
-            if (phonesAndEmails.containsKey(changedPhone)) { // проверяем содержит ли map совпадение по ключу
+            if (phonesAndEmails.containsKey(changedPhone)) {
                 if (!phonesAndEmails.get(changedPhone).containsAll(emails)) {
-                    List<String> listEmail = phonesAndEmails.get(changedPhone); // получаем эмейлы по ключу и добавляем их в listEmail
-                    listEmail.addAll(emails); // добавляем в listEmail все emails
-                    phonesAndEmails.replace(changedPhone, listEmail); // обновляем map phoneAndEmails
+                    List<String> listEmail = phonesAndEmails.get(changedPhone);
+                    listEmail.addAll(emails);
+                    phonesAndEmails.replace(changedPhone, listEmail);
                 }
             } else {
-                phonesAndEmails.put(changedPhone, emails); // если совпадения нет, то кладём в map ключ и значение
+                phonesAndEmails.put(changedPhone, emails);
             }
 
         }

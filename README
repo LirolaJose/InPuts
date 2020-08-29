@@ -1,0 +1,26 @@
+To perform this task use a build tool (Gradle or Maven).
+
+The presented inputs.zip file contains files with data about phone numbers corresponding to email addresses, e.g.:
+
++1 (123) 3245-345-345 abc@domain.com, def@domain1.org
+
+One phone number can correspond to several email addresses. There may be duplicates and empty lines, and email addresses can be separated by spaces, tabs, commas, etc.
+
+Subfolders in the archive can contain other subfolders. These subfolders contain other attached archives, and so on.
+Some files are compressed by the gzip archiver, in which case their names end with .gz.
+
+It is necessary to generate an inputsv2.zip file, which will contain the same content as the original archive, with the following exceptions:
+
+1. You need to change city codes in all phone numbers:
+
+a. 101 → 401.
+
+b. 202 → 802.
+
+c. 301 → 321.
+
+2. Then, put a phones.txt file containing the list of all unique phone numbers (in the following format: +1 (2345) 678901234) sorted alphabetically in the archive root.
+
+3. Finally, put an emails.txt file containing the list of all unique email addresses sorted alphabetically with the .org domain in the archive root.
+
+

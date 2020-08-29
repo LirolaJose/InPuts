@@ -40,7 +40,7 @@ public class Main {
                     }
                 } else {
                     System.out.println(Main.getDateTime() + " " + item.getPath() + " is being processed");
-                    Print.getNumberFromFile(item, phonesAndEmails); // print вызывает метод getNumberFromFile из класса Print и указываем путь файла.
+                    Print.getNumberFromFile(item, phonesAndEmails);
                 }
             }
         } else {
@@ -60,7 +60,7 @@ public class Main {
         }
         Unpack.unpackZip("D://Programming//inputs_v2.zip", "D://Programming//");
         Main.fetchChild(dir);// переменная example вызывает метод fetchChild
-        phonesAndEmails.forEach((phone, email) -> System.out.println(phone + ":" + email.toString())); // в Map для каждой пары ключ - значение выводим на экран: Ключ: Значение в строку
+        phonesAndEmails.forEach((phone, email) -> System.out.println(phone + ":" + email.toString()));
         CreateTextFile.mkTxt(phonesAndEmails);
         ZipPack.zip(dir.getAbsolutePath(), "D://Programming//inputsV2.zip");
     }
